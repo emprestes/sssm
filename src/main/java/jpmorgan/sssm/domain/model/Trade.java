@@ -1,5 +1,14 @@
 package jpmorgan.sssm.domain.model;
 
-public class Trade {
+import java.math.BigDecimal;
 
+class Trade {
+
+    private long timestamp;
+
+    private int quantity;
+
+    private Indicator indicator;
+
+    private BigDecimal price;
 }

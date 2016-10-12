@@ -1,5 +1,5 @@
 package jpmorgan.sssm.domain.model;
 
-public enum StockType {
-
+enum StockType {
+    COMMON, PREFERRED
 }

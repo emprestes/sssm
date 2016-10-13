@@ -16,15 +16,19 @@ class Trade implements Comparable<Trade> {
 
     private BigDecimal price;
 
-    public static Trade of(long nowInMillis) {
-        return of(nowInMillis, 0, null, 0.0);
+    public static Trade buy(long nowInMillis) {
+        return of(nowInMillis, 0, Indicator.BUY, 0.0);
     }
 
-    public static Trade of(long nowInMillis, int quantity, Indicator indicator, double price) {
+    public static Trade sell(long nowInMillis) {
+        return of(nowInMillis, 0, Indicator.SELL, 0.0);
+    }
+
+    private static Trade of(long nowInMillis, int quantity, Indicator indicator, double price) {
         return new Trade(nowInMillis)
-                .setQuantity(quantity)
+                .withQuantity(quantity)
                 .setIndicator(indicator)
-                .setPrice(price);
+                .withPrice(price);
     }
 
     private Trade(long nowInMillis) {
@@ -41,7 +45,7 @@ class Trade implements Comparable<Trade> {
         return quantity;
     }
 
-    public Trade setQuantity(int quantity) {
+    public Trade withQuantity(int quantity) {
         this.quantity = quantity;
         return this;
     }
@@ -50,7 +54,7 @@ class Trade implements Comparable<Trade> {
         return indicator;
     }
 
-    public Trade setIndicator(Indicator indicator) {
+    private Trade setIndicator(Indicator indicator) {
         this.indicator = indicator;
         return this;
     }
@@ -59,11 +63,11 @@ class Trade implements Comparable<Trade> {
         return Optional.of(price);
     }
 
-    public Trade setPrice(double price) {
-        return setPrice(BigDecimal.valueOf(price));
+    public Trade withPrice(double price) {
+        return withPrice(BigDecimal.valueOf(price));
     }
 
-    public Trade setPrice(BigDecimal price) {
+    public Trade withPrice(BigDecimal price) {
         this.price = price;
         return this;
     }

@@ -10,16 +10,16 @@ public class TradeComparabilityTest extends ComparabilityTestCase {
 
     @Override
     protected Comparable createLessInstance() throws Exception {
-        return Trade.of(1111111111L);
+        return Trade.buy(1111111111L);
     }
 
     @Override
     protected Comparable createEqualInstance() throws Exception {
-        return Trade.of(3333333333L);
+        return Trade.sell(3333333333L);
     }
 
     @Override
     protected Comparable createGreaterInstance() throws Exception {
-        return Trade.of(9999999999L);
+        return Trade.buy(9999999999L);
     }
 }

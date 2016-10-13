@@ -10,11 +10,11 @@ public class TradeEqualsHashCodeTest extends EqualsHashCodeTestCase {
 
     @Override
     protected Object createInstance() throws Exception {
-        return Trade.of(System.currentTimeMillis());
+        return Trade.buy(System.currentTimeMillis());
     }
 
     @Override
     protected Object createNotEqualInstance() throws Exception {
-        return Trade.of(98798798798879L);
+        return Trade.sell(98798798798879L);
     }
 }

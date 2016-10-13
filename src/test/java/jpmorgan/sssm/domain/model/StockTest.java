@@ -70,4 +70,20 @@ public class StockTest {
         Assert.assertTrue(stock.isPreferred());
         Assert.assertEquals(BigDecimal.valueOf(500000, 2), result);
     }
+
+    @Test
+    public void stockBuySellTest() {
+        Stock stock = Stock.ofALE();
+
+        Assert.assertTrue(stock.isEmpty());
+
+        stock.buy(System.currentTimeMillis())
+                .withQuantity(2)
+                .withPrice(100.0);
+        stock.sell(System.currentTimeMillis())
+                .withQuantity(3)
+                .withPrice(25.00);
+
+        Assert.assertFalse(stock.isEmpty());
+    }
 }

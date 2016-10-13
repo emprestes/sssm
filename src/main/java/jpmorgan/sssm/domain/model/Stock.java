@@ -129,6 +129,28 @@ public class Stock {
         return trades;
     }
 
+    public boolean isEmpty() {
+        return trades.isEmpty();
+    }
+
+    public Trade buy(long timeInMillis) {
+        Trade trade;
+
+        trade = Trade.buy(timeInMillis);
+        trades.add(trade);
+
+        return trade;
+    }
+
+    public Trade sell(long timeInMillis) {
+        Trade trade;
+
+        trade = Trade.sell(timeInMillis);
+        trades.add(trade);
+
+        return trade;
+    }
+
     public BigDecimal calcDividendYield(double price) {
         return calcDividendYield(BigDecimal.valueOf(price));
     }

@@ -1,5 +1,8 @@
 package jpmorgan.sssm.domain.model;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
+
 import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.Set;
@@ -120,28 +123,38 @@ public class Stock {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Stock stock = (Stock) o;
-
-        if (getSymbol() != null ? !getSymbol().equals(stock.getSymbol()) : stock.getSymbol() != null) return false;
-        if (getType() != stock.getType()) return false;
-        if (getLastDividend() != null ? !getLastDividend().equals(stock.getLastDividend()) : stock.getLastDividend() != null)
+        if (o == null) {
             return false;
-        if (getFixedDividend() != null ? !getFixedDividend().equals(stock.getFixedDividend()) : stock.getFixedDividend() != null)
+        }
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Stock)) {
             return false;
-        return getParValue() != null ? getParValue().equals(stock.getParValue()) : stock.getParValue() == null;
+        }
+        final Stock other = (Stock) o;
+        return Objects.equal(getSymbol(), other.getSymbol())
+                && Objects.equal(getType(), other.getType())
+                && Objects.equal(getLastDividend(), other.getLastDividend())
+                && Objects.equal(getFixedDividend(), other.getFixedDividend())
+                && Objects.equal(getParValue(), other.getParValue());
 
     }
 
     @Override
     public int hashCode() {
-        int result = getSymbol() != null ? getSymbol().hashCode() : 0;
-        result = 31 * result + (getType() != null ? getType().hashCode() : 0);
-        result = 31 * result + (getLastDividend() != null ? getLastDividend().hashCode() : 0);
-        result = 31 * result + (getFixedDividend() != null ? getFixedDividend().hashCode() : 0);
-        result = 31 * result + (getParValue() != null ? getParValue().hashCode() : 0);
-        return result;
+        return Objects.hashCode(getSymbol(), getType(), getLastDividend(), getFixedDividend(), getParValue());
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("symbol", symbol)
+                .add("type", type)
+                .add("lastDividend", lastDividend)
+                .add("fixedDividend", fixedDividend)
+                .add("parValue", parValue)
+                .add("trades", trades.size())
+                .toString();
     }
 }

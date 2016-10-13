@@ -1,5 +1,8 @@
 package jpmorgan.sssm.domain.model;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
+
 import java.math.BigDecimal;
 import java.util.Optional;
 
@@ -67,25 +70,26 @@ class Trade implements Comparable<Trade> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Trade trade = (Trade) o;
-
-        if (getTimestamp() != trade.getTimestamp()) return false;
-        if (getQuantity() != trade.getQuantity()) return false;
-        if (getIndicator() != trade.getIndicator()) return false;
-        return getPrice() != null ? getPrice().equals(trade.getPrice()) : trade.getPrice() == null;
+        if (o == null) {
+            return false;
+        }
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Trade)) {
+            return false;
+        }
+        final Trade other = (Trade) o;
+        return Objects.equal(getTimestamp(), other.getTimestamp())
+                && Objects.equal(getQuantity(), other.getQuantity())
+                && Objects.equal(getIndicator(), other.getIndicator())
+                && Objects.equal(getPrice(), other.getPrice());
 
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (getTimestamp() ^ (getTimestamp() >>> 32));
-        result = 31 * result + getQuantity();
-        result = 31 * result + (getIndicator() != null ? getIndicator().hashCode() : 0);
-        result = 31 * result + (getPrice() != null ? getPrice().hashCode() : 0);
-        return result;
+        return Objects.hashCode(getTimestamp(), getQuantity(), getIndicator(), getPrice());
     }
 
     @Override
@@ -95,5 +99,15 @@ class Trade implements Comparable<Trade> {
         comp = comp == 0 && timestamp > o.timestamp ? 1 : 0;
 
         return comp;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("timestamp", getTimestamp())
+                .add("quantity", getQuantity())
+                .add("indicator", getIndicator())
+                .add("price", getPrice())
+                .toString();
     }
 }

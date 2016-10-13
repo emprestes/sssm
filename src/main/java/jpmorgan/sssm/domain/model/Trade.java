@@ -96,7 +96,7 @@ class Trade implements Comparable<Trade> {
     public int compareTo(Trade o) {
         int comp = timestamp < o.timestamp ? -1 : 0;
 
-        comp = comp == 0 && timestamp > o.timestamp ? 1 : 0;
+        comp = comp == 0 ? timestamp > o.timestamp ? 1 : 0 : comp;
 
         return comp;
     }

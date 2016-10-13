@@ -13,6 +13,23 @@ class Trade {
 
     private BigDecimal price;
 
+    public static Trade of(long nowInMillis) {
+        return of(nowInMillis, 0, null, 0.0);
+    }
+
+    public static Trade of(long nowInMillis, int quantity, Indicator indicator, double price) {
+        return new Trade(nowInMillis)
+                .setQuantity(quantity)
+                .setIndicator(indicator)
+                .setPrice(price);
+    }
+
+    private Trade(long nowInMillis) {
+        super();
+
+        this.timestamp = nowInMillis;
+    }
+
     public long getTimestamp() {
         return timestamp;
     }
@@ -37,6 +54,10 @@ class Trade {
 
     public Optional<BigDecimal> getPrice() {
         return Optional.of(price);
+    }
+
+    public Trade setPrice(double price) {
+        return setPrice(BigDecimal.valueOf(price));
     }
 
     public Trade setPrice(BigDecimal price) {

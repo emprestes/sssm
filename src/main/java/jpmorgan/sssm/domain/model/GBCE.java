@@ -7,6 +7,14 @@ public class GBCE {
 
     private final Set<Stock> stocks = new HashSet<>();
 
+    public static GBCE create() {
+        return new GBCE();
+    }
+
+    private GBCE() {
+        super();
+    }
+
     public Set<Stock> getStocks() {
         return stocks;
     }

@@ -23,15 +23,30 @@
  </build>
 
  <dependencies>
+  <!-- Guava -->
   <dependency>
    <groupId>com.google.guava</groupId>
    <artifactId>guava</artifactId>
    <version>19.0</version>
+  </dependency>
+
+  <!-- JUnit -->
+  <dependency>
+   <groupId>junit</groupId>
+   <artifactId>junit</artifactId>
+   <version>${version.junit}</version>
+  </dependency>
+  <dependency>
+   <groupId>junit-addons</groupId>
+   <artifactId>junit-addons</artifactId>
+   <version>${version.junit-addons}</version>
   </dependency>
  </dependencies>
 
  <properties>
   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   <version.jdk>1.8</version.jdk>
+  <version.junit>4.12</version.junit>
+  <version.junit-addons>1.4</version.junit-addons>
  </properties>
 </project>

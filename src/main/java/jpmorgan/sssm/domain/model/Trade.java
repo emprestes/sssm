@@ -64,4 +64,27 @@ class Trade {
         this.price = price;
         return this;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Trade trade = (Trade) o;
+
+        if (getTimestamp() != trade.getTimestamp()) return false;
+        if (getQuantity() != trade.getQuantity()) return false;
+        if (getIndicator() != trade.getIndicator()) return false;
+        return getPrice() != null ? getPrice().equals(trade.getPrice()) : trade.getPrice() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (getTimestamp() ^ (getTimestamp() >>> 32));
+        result = 31 * result + getQuantity();
+        result = 31 * result + (getIndicator() != null ? getIndicator().hashCode() : 0);
+        result = 31 * result + (getPrice() != null ? getPrice().hashCode() : 0);
+        return result;
+    }
 }

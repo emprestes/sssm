@@ -7,12 +7,13 @@ import java.util.TreeSet;
 
 public class Stock {
 
-private final Set<Trade> trades = new TreeSet<>();
     private String symbol;
     private StockType type;
     private BigDecimal lastDividend;
     private BigDecimal fixedDividend;
     private BigDecimal parValue;
+
+    private final Set<Trade> trades = new TreeSet<>();
 
     private Stock() {
         super();
@@ -115,5 +116,32 @@ private final Set<Trade> trades = new TreeSet<>();
 
     public Set<Trade> getTrades() {
         return trades;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Stock stock = (Stock) o;
+
+        if (getSymbol() != null ? !getSymbol().equals(stock.getSymbol()) : stock.getSymbol() != null) return false;
+        if (getType() != stock.getType()) return false;
+        if (getLastDividend() != null ? !getLastDividend().equals(stock.getLastDividend()) : stock.getLastDividend() != null)
+            return false;
+        if (getFixedDividend() != null ? !getFixedDividend().equals(stock.getFixedDividend()) : stock.getFixedDividend() != null)
+            return false;
+        return getParValue() != null ? getParValue().equals(stock.getParValue()) : stock.getParValue() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getSymbol() != null ? getSymbol().hashCode() : 0;
+        result = 31 * result + (getType() != null ? getType().hashCode() : 0);
+        result = 31 * result + (getLastDividend() != null ? getLastDividend().hashCode() : 0);
+        result = 31 * result + (getFixedDividend() != null ? getFixedDividend().hashCode() : 0);
+        result = 31 * result + (getParValue() != null ? getParValue().hashCode() : 0);
+        return result;
     }
 }

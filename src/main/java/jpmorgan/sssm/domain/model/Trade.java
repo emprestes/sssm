@@ -3,7 +3,7 @@ package jpmorgan.sssm.domain.model;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-class Trade {
+class Trade implements Comparable<Trade> {
 
     private long timestamp;
 
@@ -86,5 +86,14 @@ class Trade {
         result = 31 * result + (getIndicator() != null ? getIndicator().hashCode() : 0);
         result = 31 * result + (getPrice() != null ? getPrice().hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public int compareTo(Trade o) {
+        int comp = timestamp < o.timestamp ? -1 : 0;
+
+        comp = comp == 0 && timestamp > o.timestamp ? 1 : 0;
+
+        return comp;
     }
 }

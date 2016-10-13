@@ -84,23 +84,25 @@ class Trade implements Comparable<Trade> {
             return false;
         }
         final Trade other = (Trade) o;
-        return Objects.equal(getTimestamp(), other.getTimestamp())
-                && Objects.equal(getQuantity(), other.getQuantity())
-                && Objects.equal(getIndicator(), other.getIndicator())
-                && Objects.equal(getPrice(), other.getPrice());
+        return Objects.equal(timestamp, other.timestamp)
+                && Objects.equal(quantity, other.quantity)
+                && Objects.equal(indicator, other.indicator)
+                && Objects.equal(price, other.price);
 
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getTimestamp(), getQuantity(), getIndicator(), getPrice());
+        return Objects.hashCode(timestamp, quantity, indicator, price);
     }
 
     @Override
     public int compareTo(Trade o) {
-        int comp = timestamp < o.timestamp ? -1 : 0;
+        int comp = Long.compare(timestamp, o.timestamp);
 
-        comp = comp == 0 ? timestamp > o.timestamp ? 1 : 0 : comp;
+        comp = comp == 0 ? indicator.compareTo(o.indicator) : comp;
+        comp = comp == 0 ? Integer.compare(quantity, o.quantity) : comp;
+        comp = comp == 0 ? price.compareTo(o.price) : comp;
 
         return comp;
     }

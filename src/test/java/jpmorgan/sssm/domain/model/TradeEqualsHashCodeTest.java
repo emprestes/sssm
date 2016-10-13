@@ -10,7 +10,7 @@ public class TradeEqualsHashCodeTest extends EqualsHashCodeTestCase {
 
     @Override
     protected Object createInstance() throws Exception {
-        return Trade.buy(System.currentTimeMillis());
+        return Trade.buy(2323134234L);
     }
 
     @Override

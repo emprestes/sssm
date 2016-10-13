@@ -151,6 +151,10 @@ public class Stock {
         return trade;
     }
 
+    public int size() {
+        return trades.size();
+    }
+
     public BigDecimal calcDividendYield(double price) {
         return calcDividendYield(BigDecimal.valueOf(price));
     }

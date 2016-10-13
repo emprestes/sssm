@@ -83,7 +83,14 @@ public class StockTest {
         stock.sell(System.currentTimeMillis())
                 .withQuantity(3)
                 .withPrice(25.00);
+        stock.buy(System.currentTimeMillis())
+                .withQuantity(3)
+                .withPrice(60.0);
+        stock.sell(System.currentTimeMillis())
+                .withQuantity(7)
+                .withPrice(98.34);
 
         Assert.assertFalse(stock.isEmpty());
+        Assert.assertEquals(4, stock.size());
     }
 }

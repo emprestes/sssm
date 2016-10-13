@@ -121,6 +121,30 @@ public class Stock {
         return trades;
     }
 
+    public BigDecimal calcDividendYield(double price) {
+        return calcDividendYield(BigDecimal.valueOf(price));
+    }
+
+    public BigDecimal calcDividendYield(BigDecimal price) {
+        BigDecimal value = BigDecimal.ZERO;
+
+        if (price != null && price.doubleValue() > value.doubleValue()) {
+            switch (type) {
+                case COMMON:
+                    value = lastDividend.divide(price, BigDecimal.ROUND_HALF_UP);
+                    break;
+                case PREFERRED:
+                    value = fixedDividend.multiply(parValue)
+                            .divide(price, BigDecimal.ROUND_HALF_UP);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null) {

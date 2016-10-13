@@ -97,6 +97,10 @@ public class Stock {
         return StockType.isCommon(type);
     }
 
+    public boolean isPreferred() {
+        return StockType.isPreferred(type);
+    }
+
     public Optional<BigDecimal> getLastDividend() {
         return Optional.of(lastDividend);
     }

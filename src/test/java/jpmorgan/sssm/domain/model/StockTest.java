@@ -28,4 +28,18 @@ public class StockTest {
         Assert.assertTrue(stock.isCommon());
         Assert.assertEquals(BigDecimal.valueOf(0.0023), result);
     }
+
+    @Test
+    public void calcDividendYieldPreferred() {
+        double price;
+        BigDecimal result;
+        Stock stock;
+
+        price = -10.0;
+        stock = Stock.ofGIN();
+        result = stock.calcDividendYield(price);
+
+        Assert.assertTrue(stock.isPreferred());
+        Assert.assertEquals(BigDecimal.valueOf(-0.002), result);
+    }
 }

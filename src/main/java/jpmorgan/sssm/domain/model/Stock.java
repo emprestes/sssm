@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.function.Predicate;
 
 public class Stock {
 
@@ -190,6 +191,26 @@ public class Stock {
         dividend = price.divide(dividend, 2, BigDecimal.ROUND_HALF_UP);
 
         return dividend;
+    }
+
+    public BigDecimal calcVolumeWeighted(long time) {
+        BigDecimal divisor;
+        BigDecimal dividend;
+        Predicate<Trade> period;
+
+        period = i -> i.getTimestamp() >= time;
+
+        dividend = trades.stream()
+                .filter(period)
+                .map(Trade::getPriceQuantity)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        divisor = BigDecimal.valueOf(trades.stream()
+                .filter(period)
+                .mapToLong(Trade::getQuantity)
+                .sum());
+
+        return dividend.divide(divisor, 2, BigDecimal.ROUND_HALF_UP);
     }
 
     @Override

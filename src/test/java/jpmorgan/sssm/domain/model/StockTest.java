@@ -7,6 +7,9 @@ import java.math.BigDecimal;
 
 public class StockTest {
 
+    static final long _1SECOND = 1000;
+    static final long _5SECONDS = 5 * _1SECOND;
+
     @Test
     public void calcDividendYieldByZero() {
         double price = 0.0;
@@ -92,5 +95,47 @@ public class StockTest {
 
         Assert.assertFalse(stock.isEmpty());
         Assert.assertEquals(4, stock.size());
+    }
+
+    @Test
+    public void calcVolumeWeightedTest() throws Exception {
+        Stock stock = Stock.ofGIN();
+        BigDecimal result;
+
+        stock.buy(System.currentTimeMillis())
+                .withQuantity(6)
+                .withPrice(99);
+        Thread.sleep(_1SECOND);
+        stock.sell(System.currentTimeMillis())
+                .withQuantity(4)
+                .withPrice(23.48);
+        Thread.sleep(_1SECOND);
+        stock.buy(System.currentTimeMillis())
+                .withQuantity(3)
+                .withPrice(60.0);
+        Thread.sleep(_1SECOND);
+        stock.sell(System.currentTimeMillis())
+                .withQuantity(7)
+                .withPrice(98.34);
+        Thread.sleep(_1SECOND);
+        stock.buy(System.currentTimeMillis())
+                .withQuantity(2)
+                .withPrice(100.0);
+        Thread.sleep(_1SECOND);
+        stock.sell(System.currentTimeMillis())
+                .withQuantity(20)
+                .withPrice(253.39);
+        Thread.sleep(_1SECOND);
+        stock.buy(System.currentTimeMillis())
+                .withQuantity(45)
+                .withPrice(88.01);
+        Thread.sleep(_1SECOND);
+        stock.sell(System.currentTimeMillis())
+                .withQuantity(67)
+                .withPrice(122.98);
+
+        result = stock.calcVolumeWeighted(System.currentTimeMillis() - _5SECONDS);
+
+        Assert.assertEquals(BigDecimal.valueOf(128.77), result);
     }
 }

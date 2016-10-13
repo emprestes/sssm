@@ -63,6 +63,10 @@ class Trade implements Comparable<Trade> {
         return Optional.of(price);
     }
 
+    public BigDecimal getPriceQuantity() {
+        return price.multiply(BigDecimal.valueOf(quantity));
+    }
+
     public Trade withPrice(double price) {
         return withPrice(BigDecimal.valueOf(price));
     }

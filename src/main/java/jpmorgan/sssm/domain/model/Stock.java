@@ -93,6 +93,10 @@ public class Stock {
         return type;
     }
 
+    public boolean isCommon() {
+        return StockType.isCommon(type);
+    }
+
     public Optional<BigDecimal> getLastDividend() {
         return Optional.of(lastDividend);
     }
@@ -131,11 +135,11 @@ public class Stock {
         if (price != null && price.doubleValue() > value.doubleValue()) {
             switch (type) {
                 case COMMON:
-                    value = lastDividend.divide(price, BigDecimal.ROUND_HALF_UP);
+                    value = lastDividend.divide(price);
                     break;
                 case PREFERRED:
                     value = fixedDividend.multiply(parValue)
-                            .divide(price, BigDecimal.ROUND_HALF_UP);
+                            .divide(price);
                     break;
                 default:
                     break;

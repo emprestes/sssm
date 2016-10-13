@@ -132,7 +132,7 @@ public class Stock {
     public BigDecimal calcDividendYield(BigDecimal price) {
         BigDecimal value = BigDecimal.ZERO;
 
-        if (price != null && price.doubleValue() > value.doubleValue()) {
+        if (price != null && price.doubleValue() != value.doubleValue()) {
             switch (type) {
                 case COMMON:
                     value = lastDividend.divide(price);

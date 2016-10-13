@@ -153,6 +153,19 @@ public class Stock {
         return value;
     }
 
+    public BigDecimal calcPERatio(double price) {
+        return calcPERatio(BigDecimal.valueOf(price));
+    }
+
+    public BigDecimal calcPERatio(BigDecimal price) {
+        BigDecimal dividend;
+
+        dividend = calcDividendYield(price);
+        dividend = price.divide(dividend, 2, BigDecimal.ROUND_HALF_UP);
+
+        return dividend;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null) {

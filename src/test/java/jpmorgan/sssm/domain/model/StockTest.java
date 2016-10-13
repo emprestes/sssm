@@ -42,4 +42,32 @@ public class StockTest {
         Assert.assertTrue(stock.isPreferred());
         Assert.assertEquals(BigDecimal.valueOf(-0.002), result);
     }
+
+    @Test
+    public void calcPERatioCommon() {
+        double price;
+        BigDecimal result;
+        Stock stock;
+
+        price = 100.0;
+        stock = Stock.ofALE();
+        result = stock.calcPERatio(price);
+
+        Assert.assertTrue(stock.isCommon());
+        Assert.assertEquals(BigDecimal.valueOf(43478.26), result);
+    }
+
+    @Test
+    public void calcPERatioPreferred() {
+        double price;
+        BigDecimal result;
+        Stock stock;
+
+        price = -10.0;
+        stock = Stock.ofGIN();
+        result = stock.calcPERatio(price);
+
+        Assert.assertTrue(stock.isPreferred());
+        Assert.assertEquals(BigDecimal.valueOf(500000, 2), result);
+    }
 }

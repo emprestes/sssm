@@ -1,7 +1,5 @@
 # Super Simple Stock Market
 
-Requirements
-
 The Global Beverage Corporation Exchange is a new stock market trading in drinks companies.
 a. Your company is building the object-oriented system to run that trading.
 b. You have been assigned to build part of the core object model for a limited phase 1

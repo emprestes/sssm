@@ -6,7 +6,7 @@ b. You have been assigned to build part of the core object model for a limited p
 
 ### Requirement
 
-* Issue #1
+* Issue [#1](https://github.com/emprestes/sssm/issues/1)
 
 ### Analysis and Project
 

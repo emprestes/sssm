@@ -9,27 +9,58 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class GBCE {
+/**
+ * Global Beverage Corporation Exchange definition.
+ *
+ * @author Prestes, E. M.
+ * @see Stock
+ * @since October 2016
+ */
+public final class GBCE {
 
     private final Set<Stock> stocks = new HashSet<>();
 
+    /**
+     * Default constructor
+     */
     private GBCE() {
         super();
     }
 
+    /**
+     * Creating an instance.
+     *
+     * @return GBCE
+     */
     public static GBCE create() {
         return new GBCE();
     }
 
+    /**
+     * Getting the stock items.
+     *
+     * @return Set
+     */
     public Set<Stock> getStocks() {
         return stocks;
     }
 
+    /**
+     * Adding stock items.
+     *
+     * @param stock Stock informed.
+     * @return GBCE
+     */
     public GBCE add(Stock... stock) {
         stocks.addAll(Arrays.asList(stock));
         return this;
     }
 
+    /**
+     * Calculate all share indexes.
+     *
+     * @return BigDecimal
+     */
     public BigDecimal calcAllShareIndexes() {
         BigDecimal value;
         long n;

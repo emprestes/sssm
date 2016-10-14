@@ -4,12 +4,15 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Predicate;
 
 public class Stock {
+
+    private static final int ZERO = 0;
 
     private String symbol;
     private StockType type;
@@ -193,12 +196,16 @@ public class Stock {
         return dividend;
     }
 
+    public BigDecimal calcVolumeWeighted() {
+        return calcVolumeWeighted(ZERO);
+    }
+
     public BigDecimal calcVolumeWeighted(long time) {
         BigDecimal divisor;
         BigDecimal dividend;
         Predicate<Trade> period;
 
-        period = i -> i.getTimestamp() >= time;
+        period = i -> time == ZERO || i.getTimestamp() >= time;
 
         dividend = trades.stream()
                 .filter(period)
@@ -210,7 +217,8 @@ public class Stock {
                 .mapToLong(Trade::getQuantity)
                 .sum());
 
-        return dividend.divide(divisor, 2, BigDecimal.ROUND_HALF_UP);
+        dividend =  dividend.divide(divisor, MathContext.DECIMAL64);
+        return  dividend;
     }
 
     @Override
